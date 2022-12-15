@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import * as dat from "gui";
 import { OrbitControls } from "orbitControls";
 import { FontLoader } from "fontLoader";
 import { TextGeometry } from "textGeometry";
