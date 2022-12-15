@@ -85,25 +85,25 @@ const snowNormalTexture = textureLoader.load(
 );
 
 const snowflakeTexture1 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake1.png"
+  "./assets/textures/snowflake/snowflake1.png"
 );
 
 const snowflakeTexture2 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake2.png"
+  "./assets/textures/snowflake/snowflake2.png"
 );
 const snowflakeTexture3 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake3.png"
+  "./assets/textures/snowflake/snowflake3.png"
 );
 const snowflakeTexture4 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake4.png"
+  "./assets/textures/snowflake/snowflake4.png"
 );
 const snowflakeTexture5 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake5.png"
+  "./assets/textures/snowflake/snowflake5.png"
 );
 
 // roof texture
 const roofTexture = textureLoader.load(
-  "../assets/textures/roof/roof_tiles_14_diff_4k.jpg"
+  "./assets/textures/roof/roof_tiles_14_diff_4k.jpg"
 );
 
 grassColorTexture.repeat.set(8, 8);
