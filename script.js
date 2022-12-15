@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import * as dat from "gui";
+// import * as dat from "gui";
 import { OrbitControls } from "orbitControls";
 import { FontLoader } from "fontLoader";
 import { TextGeometry } from "textGeometry";
@@ -10,7 +10,7 @@ let mouse = { X: 0, Y: 0 };
  * Base
  */
 // Debug
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -341,12 +341,12 @@ cone.scale.set(0.01, 0.01, 0.01);
 cone.position.z = 3.45;
 cone.position.x = -2.6;
 cone.position.y = 2;
-gui.add(cone.rotation, "x").min(-5).max(5).step(0.001);
-gui.add(cone.rotation, "y").min(-5).max(5).step(0.001);
-gui.add(cone.rotation, "z").min(-5).max(5).step(0.001);
-gui.add(cone.position, "x").min(-5).max(5).step(0.001);
-gui.add(cone.position, "y").min(-5).max(5).step(0.001);
-gui.add(cone.position, "z").min(-5).max(5).step(0.001);
+// gui.add(cone.rotation, "x").min(-5).max(5).step(0.001);
+// gui.add(cone.rotation, "y").min(-5).max(5).step(0.001);
+// gui.add(cone.rotation, "z").min(-5).max(5).step(0.001);
+// gui.add(cone.position, "x").min(-5).max(5).step(0.001);
+// gui.add(cone.position, "y").min(-5).max(5).step(0.001);
+// gui.add(cone.position, "z").min(-5).max(5).step(0.001);
 scene.add(cone);
 
 // Bushes
@@ -493,16 +493,16 @@ fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight("#476694", 0.8);
-gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
+// gui.add(ambientLight, "intensity").min(0).max(1).step(0.001);
 scene.add(ambientLight);
 
 // Directional light
 const moonLight = new THREE.DirectionalLight("#ffd75e", 0.5);
 moonLight.position.set(4, 5, -2);
-gui.add(moonLight, "intensity").min(0).max(1).step(0.001);
-gui.add(moonLight.position, "x").min(-5).max(5).step(0.001);
-gui.add(moonLight.position, "y").min(-5).max(5).step(0.001);
-gui.add(moonLight.position, "z").min(-5).max(5).step(0.001);
+// gui.add(moonLight, "intensity").min(0).max(1).step(0.001);
+// gui.add(moonLight.position, "x").min(-5).max(5).step(0.001);
+// gui.add(moonLight.position, "y").min(-5).max(5).step(0.001);
+// gui.add(moonLight.position, "z").min(-5).max(5).step(0.001);
 scene.add(moonLight);
 
 // Door Light
