@@ -469,7 +469,7 @@ scene.add(ghost3);
 // Text
 let titleText;
 const fontLoader = new FontLoader();
-fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
+fontLoader.load("./assets/fonts/helvetiker_regular.typeface.json", (font) => {
   const titleText = new TextGeometry("happy holidays! ", {
     font,
     size: 1,
@@ -588,7 +588,6 @@ audioLoader.load("./assets/music/auld_lang_syne.mp3", function (buffer) {
 });
 
 pauseButton.setAttribute("hidden", true);
-
 pauseButton.addEventListener("click", (e) => {
   e.stopPropagation();
   sound.pause();
