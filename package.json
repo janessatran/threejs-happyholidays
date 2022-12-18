@@ -3,8 +3,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
-    "dev": "rollup -c --bundleConfigAsCjs && webpack serve --config ./bundler/webpack.dev.js",
-    "deploy": "rollup -c --bundleConfigAsCjs && gh-pages -d dist"
+    "dev": "webpack serve --config ./bundler/webpack.dev.js",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@babel/core": "^7.17.10",
@@ -14,7 +14,6 @@
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
-    "gh-pages": "^4.0.0",
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "lil-gui": "^0.16.1",
@@ -29,7 +28,6 @@
     "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
-    "rollup": "^3.7.5",
-    "rollup-plugin-postcss": "^4.0.2"
+    "gh-pages": "^4.0.0"
   }
 }

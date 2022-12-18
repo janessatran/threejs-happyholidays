@@ -27,7 +27,6 @@ scene.fog = fog;
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
-// const doorColorTexture = textureLoader.load("/textures/door/color.jpg");
 const doorColorTexture = textureLoader.load(
   "/textures/door/synthetic_wood_diff_4k.jpg"
 );
@@ -35,7 +34,6 @@ const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 const doorAmbientOcclusionTexture = textureLoader.load(
   "/textures/door/ambientOcclusion.jpg"
 );
-// const doorHeightTexture = textureLoader.load("/textures/door/height.jpg");
 const doorHeightTexture = textureLoader.load(
   "/textures/door/synthetic_wood_disp_4k.png"
 );
@@ -200,7 +198,7 @@ scene.add(house);
 
 // Walls
 const walls = new THREE.Mesh(
-  new THREE.BoxBufferGeometry(5, 4, 4.15),
+  new THREE.BoxGeometry(5, 4, 4.15),
   new THREE.MeshStandardMaterial({
     // map: bricksColorTexture,
     aoMap: bricksAmbientOcclusionTexture,
@@ -253,7 +251,7 @@ squareWindowPosition.forEach((x) => {
 
 // Roof
 const roof = new THREE.Mesh(
-  new THREE.ConeBufferGeometry(4, 1.5, 4),
+  new THREE.ConeGeometry(4, 1.5, 4),
   new THREE.MeshStandardMaterial({ map: roofTexture })
 );
 roof.position.y = 4.2;
@@ -406,7 +404,7 @@ for (let i = 0; i < 100; i++) {
 // Tombstones
 // const tombstones = new THREE.Group();
 // scene.add(tombstones);
-// const tombstoneGeo = new THREE.BoxBufferGeometry(0.6, 0.8, 0.2);
+// const tombstoneGeo = new THREE.BoxGeometry(0.6, 0.8, 0.2);
 // const tombstoneMaterial = new THREE.MeshStandardMaterial({ color: "grey" });
 
 // for (let i = 0; i < 50; i++) {
@@ -442,19 +440,18 @@ floor.position.y = 0;
 scene.add(floor);
 
 /**
- * Ghosts
+ * Lights
  */
-const ghost1 = new THREE.PointLight("#f54242", 2, 3);
-scene.add(ghost1);
+const light1 = new THREE.PointLight("#f54242", 2, 3);
+scene.add(light1);
 
-const ghost2 = new THREE.PointLight("#418528", 2, 3);
-scene.add(ghost2);
+const light2 = new THREE.PointLight("#418528", 2, 3);
+scene.add(light2);
 
-const ghost3 = new THREE.PointLight("#ffff00", 2, 3);
-scene.add(ghost3);
+const light3 = new THREE.PointLight("#ffff00", 2, 3);
+scene.add(light3);
 
 // Text
-let titleText;
 const fontLoader = new FontLoader();
 fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
   const titleText = new TextGeometry("happy holidays! ", {
@@ -606,9 +603,9 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 moonLight.castShadow = true;
 doorLight.castShadow = true;
-ghost1.castShadow = true;
-ghost2.castShadow = true;
-ghost3.castShadow = true;
+light1.castShadow = true;
+light2.castShadow = true;
+light3.castShadow = true;
 
 walls.castShadow = true;
 bush1.castShadow = true;
@@ -622,17 +619,17 @@ doorLight.shadow.mapSize.width = 256;
 doorLight.shadow.mapSize.height = 256;
 doorLight.shadow.camera.far = 7;
 
-ghost1.shadow.mapSize.width = 256;
-ghost1.shadow.mapSize.height = 256;
-ghost1.shadow.camera.far = 7;
+light1.shadow.mapSize.width = 256;
+light1.shadow.mapSize.height = 256;
+light1.shadow.camera.far = 7;
 
-ghost2.shadow.mapSize.width = 256;
-ghost2.shadow.mapSize.height = 256;
-ghost2.shadow.camera.far = 7;
+light2.shadow.mapSize.width = 256;
+light2.shadow.mapSize.height = 256;
+light2.shadow.camera.far = 7;
 
-ghost3.shadow.mapSize.width = 256;
-ghost3.shadow.mapSize.height = 256;
-ghost3.shadow.camera.far = 7;
+light3.shadow.mapSize.width = 256;
+light3.shadow.mapSize.height = 256;
+light3.shadow.camera.far = 7;
 /**
  * Animate
  */
@@ -641,22 +638,22 @@ const clock = new THREE.Clock();
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
-  // Ghosts
-  const ghost1Angle = elapsedTime * 0.5;
-  ghost1.position.x = Math.cos(ghost1Angle) * 4;
-  ghost1.position.z = Math.sin(ghost1Angle) * 4;
-  ghost1.position.y = Math.sin(elapsedTime * 3);
+  // Lights
+  const light1Angle = elapsedTime * 0.5;
+  light1.position.x = Math.cos(light1Angle) * 4;
+  light1.position.z = Math.sin(light1Angle) * 4;
+  light1.position.y = Math.sin(elapsedTime * 3);
 
-  const ghost2Angle = -elapsedTime * 0.32;
-  ghost2.position.x = Math.cos(ghost2Angle) * 5;
-  ghost2.position.z = Math.sin(ghost2Angle) * 5;
-  ghost2.position.y = Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
+  const light2Angle = -elapsedTime * 0.32;
+  light2.position.x = Math.cos(light2Angle) * 5;
+  light2.position.z = Math.sin(light2Angle) * 5;
+  light2.position.y = Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
 
-  const ghost3Angle = -elapsedTime * 0.18;
-  ghost3.position.x =
-    Math.cos(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.32));
-  ghost3.position.z = Math.sin(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.5));
-  ghost3.position.y = Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
+  const light3Angle = -elapsedTime * 0.18;
+  light3.position.x =
+    Math.cos(light3Angle) * (7 + Math.sin(elapsedTime * 0.32));
+  light3.position.z = Math.sin(light3Angle) * (7 + Math.sin(elapsedTime * 0.5));
+  light3.position.y = Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
 
   for (let i = 0; i < scene.children.length; i++) {
     const object = scene.children[i];
