@@ -27,84 +27,70 @@ scene.fog = fog;
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
-// const doorColorTexture = textureLoader.load("./assets/textures/door/color.jpg");
+// const doorColorTexture = textureLoader.load("/textures/door/color.jpg");
 const doorColorTexture = textureLoader.load(
-  "./assets/textures/door/synthetic_wood_diff_4k.jpg"
+  "/textures/door/synthetic_wood_diff_4k.jpg"
 );
-const doorAlphaTexture = textureLoader.load("./assets/textures/door/alpha.jpg");
+const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 const doorAmbientOcclusionTexture = textureLoader.load(
-  "./assets/textures/door/ambientOcclusion.jpg"
+  "/textures/door/ambientOcclusion.jpg"
 );
-// const doorHeightTexture = textureLoader.load("./assets/textures/door/height.jpg");
+// const doorHeightTexture = textureLoader.load("/textures/door/height.jpg");
 const doorHeightTexture = textureLoader.load(
-  "./assets/textures/door/synthetic_wood_disp_4k.png"
+  "/textures/door/synthetic_wood_disp_4k.png"
 );
-const doorNormalTexture = textureLoader.load(
-  "./assets/textures/door/normal.jpg"
-);
-const doorMetalnessTexture = textureLoader.load(
-  "./assets/textures/door/metalness.jpg"
-);
-const doorRoughnessTexture = textureLoader.load(
-  "./assets/textures/door/roughness.jpg"
-);
+const doorNormalTexture = textureLoader.load("/textures/door/normal.jpg");
+const doorMetalnessTexture = textureLoader.load("/textures/door/metalness.jpg");
+const doorRoughnessTexture = textureLoader.load("/textures/door/roughness.jpg");
 
-const bricksColorTexture = textureLoader.load(
-  "./assets/textures/bricks/color.jpg"
-);
+const bricksColorTexture = textureLoader.load("/textures/bricks/color.jpg");
 const bricksAmbientOcclusionTexture = textureLoader.load(
-  "./assets/textures/bricks/ambientOcclusion.jpg"
+  "/textures/bricks/ambientOcclusion.jpg"
 );
-const bricksNormalTexture = textureLoader.load(
-  "./assets/textures/bricks/normal.jpg"
-);
+const bricksNormalTexture = textureLoader.load("/textures/bricks/normal.jpg");
 const bricksRoughnessTexture = textureLoader.load(
-  "./assets/textures/bricks/roughness.jpg"
+  "/textures/bricks/roughness.jpg"
 );
 
-const grassColorTexture = textureLoader.load(
-  "./assets/textures/grass/color.jpg"
-);
+const grassColorTexture = textureLoader.load("/textures/grass/color.jpg");
 const grassAmbientOcclusionTexture = textureLoader.load(
-  "./assets/textures/grass/ambientOcclusion.jpg"
+  "/textures/grass/ambientOcclusion.jpg"
 );
-const grassNormalTexture = textureLoader.load(
-  "./assets/textures/grass/normal.jpg"
-);
+const grassNormalTexture = textureLoader.load("/textures/grass/normal.jpg");
 const grassRoughnessTexture = textureLoader.load(
-  "./assets/textures/grass/roughness.jpg"
+  "/textures/grass/roughness.jpg"
 );
 
 const snowColorTexture = textureLoader.load(
-  "./assets/textures/snow/snow_02_diff_4k.jpg"
+  "/textures/snow/snow_02_diff_4k.jpg"
 );
 const snowRoughnessTexture = textureLoader.load(
-  "./assets/textures/snow/snow_02_rough_4k.jpg"
+  "/textures/snow/snow_02_rough_4k.jpg"
 );
 const snowNormalTexture = textureLoader.load(
-  "./assets/textures/snow/snow_02_nor_gl_4k.exr"
+  "/textures/snow/snow_02_nor_gl_4k.exr"
 );
 
 const snowflakeTexture1 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake1.png"
+  "./textures/snowflake/snowflake1.png"
 );
 
 const snowflakeTexture2 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake2.png"
+  "./textures/snowflake/snowflake2.png"
 );
 const snowflakeTexture3 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake3.png"
+  "./textures/snowflake/snowflake3.png"
 );
 const snowflakeTexture4 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake4.png"
+  "./textures/snowflake/snowflake4.png"
 );
 const snowflakeTexture5 = textureLoader.load(
-  "../assets/textures/snowflake/snowflake5.png"
+  "./textures/snowflake/snowflake5.png"
 );
 
 // roof texture
 const roofTexture = textureLoader.load(
-  "../assets/textures/roof/roof_tiles_14_diff_4k.jpg"
+  "./textures/roof/roof_tiles_14_diff_4k.jpg"
 );
 
 grassColorTexture.repeat.set(8, 8);
@@ -582,7 +568,7 @@ const pauseButton = document.getElementById("pause-button");
 
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new THREE.AudioLoader();
-audioLoader.load("./assets/music/auld_lang_syne.mp3", function (buffer) {
+audioLoader.load("/music/auld_lang_syne.mp3", function (buffer) {
   sound.setBuffer(buffer);
   sound.setLoop(true);
   sound.setVolume(0.5);
