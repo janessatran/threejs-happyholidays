@@ -16,12 +16,12 @@ body {
 }
 
 .music-player {
-  margin-top: 5px;
+  margin-top: 10px;
   max-height: 100%;
   position: fixed;
   top: 0;
   left: 15px;
-  z-index: 1002;
+  z-index: 1003;
 }
 
 #play-button,
@@ -36,3 +36,6 @@ svg {
   top: -40px;
   left: -100px;
 }
+
+
+/*# sourceMappingURL=main.css.map*/
