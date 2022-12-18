@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>happy holidays!</title>
-    <script type="importmap">
+    <script type="systemjs-importmap">
       {
         "imports": {
+          "script": "./public/script.js",
           "three": "https://unpkg.com/three@0.140.0/build/three.module.js",
           "gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.16",
           "orbitControls": "https://unpkg.com/three@0.140.0/examples/jsm/controls/OrbitControls.js",
@@ -54,6 +55,7 @@
         </svg>
       </div>
     </div>
-    <script type="module" src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
+    <script type="systemjs-module" src="import:script"></script>
   </body>
 </html>
