@@ -1,5 +1,7 @@
 {
-  "repository": "#",
+  "repository": {
+    "url": "git+https://github.com/janessatran//threejs-happyholidays.git"
+  },
   "license": "UNLICENSED",
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
