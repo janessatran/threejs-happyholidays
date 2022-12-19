@@ -266,7 +266,7 @@ house.add(door);
 
 // snowman
 const sphereGeometry1 = new THREE.SphereGeometry(0.6, 20, 16);
-const snowmanMaterial = new THREE.MeshBasicMaterial({ color: "white" });
+const snowmanMaterial = new THREE.MeshBasicMaterial({ color: "#e6f2f0" });
 const snowmanBase = new THREE.Mesh(sphereGeometry1, snowmanMaterial);
 snowmanBase.position.z = 3;
 snowmanBase.position.y = 0.5;
@@ -422,15 +422,15 @@ floor.position.y = 0;
 scene.add(floor);
 
 /**
- * Lights
+ * Moving Lights
  */
 const light1 = new THREE.PointLight("#f54242", 2, 3);
 scene.add(light1);
 
-const light2 = new THREE.PointLight("#418528", 2, 3);
+const light2 = new THREE.PointLight("#15695a", 2, 3);
 scene.add(light2);
 
-const light3 = new THREE.PointLight("#ffff00", 2, 3);
+const light3 = new THREE.PointLight("#36c943", 2, 3);
 scene.add(light3);
 
 // Text
@@ -466,7 +466,7 @@ fontLoader.load("./fonts/helvetiker_regular.typeface.json", (font) => {
     bevelSegments: 3,
   });
   messageText.center();
-  const messageMaterial = new THREE.MeshBasicMaterial({ color: "green" });
+  const messageMaterial = new THREE.MeshBasicMaterial({ color: "#016e0b" });
   titleMesh = new THREE.Mesh(messageText, messageMaterial);
   titleMesh.position.y = 7;
   scene.add(titleMesh);
@@ -490,7 +490,7 @@ gui.add(moonLight.position, "z").min(-5).max(5).step(0.001);
 scene.add(moonLight);
 
 // Door Light
-const doorLight = new THREE.PointLight("#ff7d46", 1, 7);
+const doorLight = new THREE.PointLight("#ff7d46", 1, 4);
 doorLight.position.set(0, 2.2, 2.7);
 house.add(doorLight);
 
@@ -632,6 +632,193 @@ loader.load(
   undefined,
   (error) => console.error(error)
 );
+
+// Wreath
+let wreath;
+loader.load(
+  "./models/wreath.glb",
+  (asset) => {
+    const obj = asset.scene;
+    wreath = obj;
+    obj.scale.set(2, 2, 2);
+    obj.position.y = 0.6;
+    obj.position.x = 0;
+    obj.rotation.set(0, 3, 0);
+    obj.castShadow = true;
+    obj.position.z = 2 + 0.1;
+    scene.add(obj);
+  },
+  undefined,
+  (error) => console.error(error)
+);
+
+const frontLightPosX = [-2, -1, 0, 1, 2];
+// front christmas lights
+let christmasLights;
+frontLightPosX.forEach((x) => {
+  loader.load(
+    "./models/lightsMulti.glb",
+    (asset) => {
+      const obj = asset.scene;
+      christmasLights = obj;
+      obj.scale.set(1, 1, 1);
+      obj.position.y = 3.15;
+      obj.position.x = x;
+      obj.rotation.set(0, 3, 0);
+      obj.castShadow = true;
+      obj.position.z = 2 + 0.4;
+      scene.add(obj);
+      // Light them up!
+      const color = x % 2 === 0 ? "#e00000" : "#55ff42";
+      const xmasLight = new THREE.PointLight(color, 1, 4);
+      xmasLight.position.set(
+        obj.position.x,
+        obj.position.y + 0.3,
+        obj.position.z
+      );
+      scene.add(xmasLight);
+    },
+    undefined,
+    (error) => console.error(error)
+  );
+});
+
+const backLightPosX = [-2, -1, 0, 1, 2];
+// front christmas lights
+backLightPosX.forEach((x) => {
+  loader.load(
+    "./models/lightsMulti.glb",
+    (asset) => {
+      const obj = asset.scene;
+      obj.scale.set(1, 1, 1);
+      obj.position.y = 3.15;
+      obj.position.x = x;
+      obj.rotation.set(0, 3, 0);
+      obj.castShadow = true;
+      obj.position.z = -2 - 0.4;
+      scene.add(obj);
+      // Light them up!
+      const color = x % 2 === 0 ? "#e00000" : "#55ff42";
+      const xmasLight = new THREE.PointLight(color, 1, 4);
+      xmasLight.position.set(
+        obj.position.x,
+        obj.position.y + 0.3,
+        obj.position.z
+      );
+      scene.add(xmasLight);
+    },
+    undefined,
+    (error) => console.error(error)
+  );
+});
+
+const sideLightPosZ = [-2, -1, 0, 1, 2];
+// side 1 christmas lights
+sideLightPosZ.forEach((z) => {
+  loader.load(
+    "./models/lightsMulti.glb",
+    (asset) => {
+      const obj = asset.scene;
+      obj.scale.set(1, 1, 1);
+      obj.position.y = 3.15;
+      obj.position.x = 2.52;
+      obj.rotation.set(0, 89.5, 0);
+      obj.castShadow = true;
+      obj.position.z = z;
+      scene.add(obj);
+      // Light them up!
+      const color = z % 2 === 0 ? "#e00000" : "#55ff42";
+      const xmasLight = new THREE.PointLight(color, 1, 4);
+      xmasLight.position.set(
+        obj.position.x + 0.4,
+        obj.position.y + 0.3,
+        obj.position.z
+      );
+      scene.add(xmasLight);
+    },
+    undefined,
+    (error) => console.error(error)
+  );
+});
+
+sideLightPosZ.forEach((z) => {
+  loader.load(
+    "./models/lightsMulti.glb",
+    (asset) => {
+      const obj = asset.scene;
+      obj.scale.set(1, 1, 1);
+      obj.position.y = 3.15;
+      obj.position.x = -2.52;
+      obj.rotation.set(0, 89.5, 0);
+      obj.castShadow = true;
+      obj.position.z = z;
+      scene.add(obj);
+      // Light them up!
+      const color = z % 2 === 0 ? "#e00000" : "#55ff42";
+      const xmasLight = new THREE.PointLight(color, 1, 4);
+      xmasLight.position.set(
+        obj.position.x - 0.4,
+        obj.position.y + 0.3,
+        obj.position.z
+      );
+      scene.add(xmasLight);
+    },
+    undefined,
+    (error) => console.error(error)
+  );
+});
+
+// candycanes
+const candyCanePosX = [-1.2, 1.2];
+candyCanePosX.forEach((x) => {
+  const redCandyCanePosZ = [3, 5, 7];
+  const rotationYValue = x < 0 ? 10 : 18;
+  redCandyCanePosZ.forEach((z) => {
+    loader.load(
+      "./models/candyCane.glb",
+      (asset) => {
+        const obj = asset.scene;
+        obj.scale.set(2, 5, 2);
+        obj.position.y = 0;
+        obj.position.x = x;
+        obj.rotation.set(0, rotationYValue, 0);
+        obj.castShadow = true;
+        obj.position.z = z;
+        scene.add(obj);
+        // Light them up!
+        const xmasLight = new THREE.PointLight("white", 1, 1);
+        xmasLight.position.set(obj.position.x, obj.position.y, obj.position.z);
+        scene.add(xmasLight);
+      },
+      undefined,
+      (error) => console.error(error)
+    );
+  });
+
+  const greenCandyCanePosZ = [4, 6];
+  greenCandyCanePosZ.forEach((z) => {
+    loader.load(
+      "./models/candyCaneMint.glb",
+      (asset) => {
+        const obj = asset.scene;
+        obj.scale.set(2, 5, 2);
+        obj.position.y = 0;
+        obj.position.x = x;
+        obj.rotation.set(0, rotationYValue, 0);
+        obj.castShadow = true;
+        obj.position.z = z;
+        scene.add(obj);
+        // Light them up!
+        const xmasLight = new THREE.PointLight("white", 1, 1);
+        xmasLight.position.set(obj.position.x, obj.position.y, obj.position.z);
+        scene.add(xmasLight);
+      },
+      undefined,
+      (error) => console.error(error)
+    );
+  });
+});
+
 /**
  * Shadows
  */
