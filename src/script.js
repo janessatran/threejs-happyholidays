@@ -607,8 +607,12 @@ loader.load(
     interactionManager.add(present);
     present.addEventListener("click", (event) => {
       event.stopPropagation();
-      sound.pause();
-      alert("Check back on Christmas!");
+      // if (sound.isPlaying) {
+      // sound.pause();
+      // playButton.removeAttribute("hidden");
+      // pauseButton.setAttribute("hidden", true);
+      // }
+      alert("Check back on Christmas Eve!");
     });
 
     const presentLight = new THREE.PointLight("white", 3, 5);
