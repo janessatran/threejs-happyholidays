@@ -30,36 +30,40 @@ scene.fog = fog;
  */
 const textureLoader = new THREE.TextureLoader();
 const doorColorTexture = textureLoader.load(
-  "/textures/door/synthetic_wood_diff_4k.jpg"
+  "./textures/door/synthetic_wood_diff_4k.jpg"
 );
-const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
+const doorAlphaTexture = textureLoader.load("./textures/door/alpha.jpg");
 const doorAmbientOcclusionTexture = textureLoader.load(
-  "/textures/door/ambientOcclusion.jpg"
+  "./textures/door/ambientOcclusion.jpg"
 );
 const doorHeightTexture = textureLoader.load(
-  "/textures/door/synthetic_wood_disp_4k.png"
+  "./textures/door/synthetic_wood_disp_4k.png"
 );
-const doorNormalTexture = textureLoader.load("/textures/door/normal.jpg");
-const doorMetalnessTexture = textureLoader.load("/textures/door/metalness.jpg");
-const doorRoughnessTexture = textureLoader.load("/textures/door/roughness.jpg");
+const doorNormalTexture = textureLoader.load("./textures/door/normal.jpg");
+const doorMetalnessTexture = textureLoader.load(
+  "./textures/door/metalness.jpg"
+);
+const doorRoughnessTexture = textureLoader.load(
+  "./textures/door/roughness.jpg"
+);
 
-const bricksColorTexture = textureLoader.load("/textures/bricks/color.jpg");
+const bricksColorTexture = textureLoader.load("./textures/bricks/color.jpg");
 const bricksAmbientOcclusionTexture = textureLoader.load(
-  "/textures/bricks/ambientOcclusion.jpg"
+  "./textures/bricks/ambientOcclusion.jpg"
 );
-const bricksNormalTexture = textureLoader.load("/textures/bricks/normal.jpg");
+const bricksNormalTexture = textureLoader.load("./textures/bricks/normal.jpg");
 const bricksRoughnessTexture = textureLoader.load(
-  "/textures/bricks/roughness.jpg"
+  "./textures/bricks/roughness.jpg"
 );
 
 const snowColorTexture = textureLoader.load(
-  "/textures/snow/snow_02_diff_4k.jpg"
+  "./textures/snow/snow_02_diff_4k.jpg"
 );
 const snowRoughnessTexture = textureLoader.load(
-  "/textures/snow/snow_02_rough_4k.jpg"
+  "./textures/snow/snow_02_rough_4k.jpg"
 );
 const snowNormalTexture = textureLoader.load(
-  "/textures/snow/snow_02_nor_gl_4k.exr"
+  "./textures/snow/snow_02_nor_gl_4k.exr"
 );
 
 const snowflakeTexture1 = textureLoader.load(
@@ -432,7 +436,7 @@ scene.add(light3);
 // Text
 let titleMesh;
 const fontLoader = new FontLoader();
-fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
+fontLoader.load("./fonts/helvetiker_regular.typeface.json", (font) => {
   const titleText = new TextGeometry("happy holidays! ", {
     font,
     size: 1,
@@ -546,7 +550,7 @@ const pauseButton = document.getElementById("pause-button");
 
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new THREE.AudioLoader();
-audioLoader.load("/music/auld_lang_syne.mp3", function (buffer) {
+audioLoader.load("./music/auld_lang_syne.mp3", function (buffer) {
   sound.setBuffer(buffer);
   sound.setLoop(true);
   sound.setVolume(0.5);
@@ -590,7 +594,7 @@ const interactionManager = new InteractionManager(
 let present;
 const loader = new GLTFLoader();
 loader.load(
-  "/models/presentRound.glb",
+  "./models/presentRound.glb",
   (asset) => {
     const obj = asset.scene;
     present = obj;
