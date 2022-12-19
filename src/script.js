@@ -606,8 +606,8 @@ loader.load(
     scene.add(obj);
     interactionManager.add(present);
     present.addEventListener("click", (event) => {
-      console.log("HI!!");
-
+      event.stopPropagation();
+      sound.pause();
       window.open("https://youtu.be/wJjcLO4APHc", "_system", "location=yes");
     });
 
