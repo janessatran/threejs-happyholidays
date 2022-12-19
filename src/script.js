@@ -4,6 +4,8 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "lil-gui";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+import { InteractionManager } from "three.interactive";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 let mouse = { X: 0, Y: 0 };
 
@@ -50,15 +52,6 @@ const bricksRoughnessTexture = textureLoader.load(
   "/textures/bricks/roughness.jpg"
 );
 
-const grassColorTexture = textureLoader.load("/textures/grass/color.jpg");
-const grassAmbientOcclusionTexture = textureLoader.load(
-  "/textures/grass/ambientOcclusion.jpg"
-);
-const grassNormalTexture = textureLoader.load("/textures/grass/normal.jpg");
-const grassRoughnessTexture = textureLoader.load(
-  "/textures/grass/roughness.jpg"
-);
-
 const snowColorTexture = textureLoader.load(
   "/textures/snow/snow_02_diff_4k.jpg"
 );
@@ -91,29 +84,15 @@ const roofTexture = textureLoader.load(
   "./textures/roof/roof_tiles_14_diff_4k.jpg"
 );
 
-grassColorTexture.repeat.set(8, 8);
 snowColorTexture.repeat.set(8, 8);
 snowRoughnessTexture.repeat.set(8, 8);
 snowNormalTexture.repeat.set(8, 8);
-grassAmbientOcclusionTexture.repeat.set(8, 8);
-grassNormalTexture.repeat.set(8, 8);
-grassRoughnessTexture.repeat.set(8, 8);
-
-grassColorTexture.wrapS = THREE.RepeatWrapping;
 snowColorTexture.wrapS = THREE.RepeatWrapping;
 snowRoughnessTexture.wrapS = THREE.RepeatWrapping;
 snowNormalTexture.wrapS = THREE.RepeatWrapping;
-grassAmbientOcclusionTexture.wrapS = THREE.RepeatWrapping;
-grassNormalTexture.wrapS = THREE.RepeatWrapping;
-grassRoughnessTexture.wrapS = THREE.RepeatWrapping;
-
-grassColorTexture.wrapT = THREE.RepeatWrapping;
 snowColorTexture.wrapT = THREE.RepeatWrapping;
 snowRoughnessTexture.wrapT = THREE.RepeatWrapping;
 snowNormalTexture.wrapT = THREE.RepeatWrapping;
-grassAmbientOcclusionTexture.wrapT = THREE.RepeatWrapping;
-grassNormalTexture.wrapT = THREE.RepeatWrapping;
-grassRoughnessTexture.wrapT = THREE.RepeatWrapping;
 
 const materials = [];
 let snowParams;
@@ -363,7 +342,6 @@ for (let i = 0; i < 100; i++) {
   let scale = Math.random();
   const radius = 10 + 20 * Math.random();
   const angle = Math.random() * Math.PI * 2;
-
   const x = Math.sin(angle) * radius;
   const z = Math.cos(angle) * radius;
   const treeColorCodes = ["#549165", "#27591c", "#7f9979", "#bdd1b8"];
@@ -452,6 +430,7 @@ const light3 = new THREE.PointLight("#ffff00", 2, 3);
 scene.add(light3);
 
 // Text
+let titleMesh;
 const fontLoader = new FontLoader();
 fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
   const titleText = new TextGeometry("happy holidays! ", {
@@ -467,7 +446,24 @@ fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
   });
   titleText.center();
   const titleMaterial = new THREE.MeshBasicMaterial({ color: "#e32a00" });
-  const titleMesh = new THREE.Mesh(titleText, titleMaterial);
+  titleMesh = new THREE.Mesh(titleText, titleMaterial);
+  titleMesh.position.y = 8;
+  scene.add(titleMesh);
+
+  const messageText = new TextGeometry("click the present! ", {
+    font,
+    size: 0.3,
+    height: 0.1,
+    curveSegments: 5,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 3,
+  });
+  messageText.center();
+  const messageMaterial = new THREE.MeshBasicMaterial({ color: "green" });
+  titleMesh = new THREE.Mesh(messageText, messageMaterial);
   titleMesh.position.y = 7;
   scene.add(titleMesh);
 });
@@ -487,27 +483,12 @@ gui.add(moonLight, "intensity").min(0).max(1).step(0.001);
 gui.add(moonLight.position, "x").min(-5).max(5).step(0.001);
 gui.add(moonLight.position, "y").min(-5).max(5).step(0.001);
 gui.add(moonLight.position, "z").min(-5).max(5).step(0.001);
-scene.add(moonLight);
+// scene.add(moonLight);
 
 // Door Light
 const doorLight = new THREE.PointLight("#ff7d46", 1, 7);
 doorLight.position.set(0, 2.2, 2.7);
-house.add(doorLight);
-
-// white spotlight shining from the side, modulated by a texture, casting a shadow
-const spotLight = new THREE.SpotLight(0xffffff);
-spotLight.position.set(100, 1000, 100);
-
-spotLight.castShadow = true;
-
-spotLight.shadow.mapSize.width = 1024;
-spotLight.shadow.mapSize.height = 1024;
-
-spotLight.shadow.camera.near = 500;
-spotLight.shadow.camera.far = 4000;
-spotLight.shadow.camera.fov = 30;
-
-scene.add(spotLight);
+// house.add(doorLight);
 
 /**
  * Sizes
@@ -596,6 +577,53 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor("#82c3d1");
 
+/**
+ * Interaction Manager
+ */
+const interactionManager = new InteractionManager(
+  renderer,
+  camera,
+  renderer.domElement
+);
+
+// Present
+let present;
+const loader = new GLTFLoader();
+loader.load(
+  "/models/presentRound.glb",
+  (asset) => {
+    const obj = asset.scene;
+    present = obj;
+    obj.scale.set(4, 3, 4);
+    obj.position.y = 5.5;
+    obj.position.x = 0;
+    obj.rotation.set(0, 3, 0);
+    obj.castShadow = true;
+    scene.add(obj);
+    interactionManager.add(present);
+    present.addEventListener("click", (event) => {
+      console.log("HI!!");
+
+      window.open("https://youtu.be/wJjcLO4APHc", "_system", "location=yes");
+    });
+
+    const presentLight = new THREE.PointLight("white", 3, 5);
+    presentLight.position.set(-0.654, 6.786, 1.15);
+    const presentLight2 = new THREE.PointLight("#f0c95d", 3, 5);
+    presentLight2.position.set(2, 7, -1);
+    gui.add(presentLight.position, "x").min(-5).max(5).step(0.001);
+    gui.add(presentLight.position, "y").min(-5).max(20).step(0.001);
+    gui.add(presentLight.position, "z").min(-5).max(10).step(0.001);
+    scene.add(presentLight);
+    scene.add(presentLight2);
+
+    presentLight.shadow.mapSize.width = 256;
+    presentLight.shadow.mapSize.height = 256;
+    presentLight.shadow.camera.far = 7;
+  },
+  undefined,
+  (error) => console.error(error)
+);
 /**
  * Shadows
  */
