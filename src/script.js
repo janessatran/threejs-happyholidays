@@ -608,7 +608,7 @@ loader.load(
     present.addEventListener("click", (event) => {
       event.stopPropagation();
       sound.pause();
-      window.open("https://youtu.be/wJjcLO4APHc", "_system", "location=yes");
+      alert("Check back on Christmas!");
     });
 
     const presentLight = new THREE.PointLight("white", 3, 5);
