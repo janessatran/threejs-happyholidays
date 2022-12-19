@@ -14,7 +14,8 @@ let mouse = { X: 0, Y: 0 };
  */
 // Debug
 const gui = new dat.GUI();
-gui.close;
+gui.close();
+
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 
