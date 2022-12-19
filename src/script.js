@@ -14,7 +14,7 @@ let mouse = { X: 0, Y: 0 };
  */
 // Debug
 const gui = new dat.GUI();
-
+gui.close;
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 
@@ -22,7 +22,7 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Fog
-const fog = new THREE.Fog("#82c3d1", 1, 20);
+const fog = new THREE.Fog("#c1e2e3", 1, 20);
 scene.fog = fog;
 
 /**
@@ -579,7 +579,7 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor("#82c3d1");
+renderer.setClearColor("#c1e2e3");
 
 /**
  * Interaction Manager
