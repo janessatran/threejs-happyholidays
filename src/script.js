@@ -608,12 +608,16 @@ loader.load(
     interactionManager.add(present);
     present.addEventListener("click", (event) => {
       event.stopPropagation();
-      // if (sound.isPlaying) {
-      // sound.pause();
-      // playButton.removeAttribute("hidden");
-      // pauseButton.setAttribute("hidden", true);
-      // }
-      alert("Check back on Christmas Eve!");
+      if (sound.isPlaying) {
+        sound.pause();
+        playButton.removeAttribute("hidden");
+        pauseButton.setAttribute("hidden", true);
+      }
+      window.open(
+        "https://www.youtube.com/embed/wJjcLO4APHc",
+        "_system",
+        "location=yes"
+      );
     });
 
     const presentLight = new THREE.PointLight("white", 3, 5);
